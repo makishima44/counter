@@ -1,0 +1,16 @@
+* {
+  font-size: 30px;
+}
+
+.counterBlock {
+  padding-top: 200px;
+  text-align: center;
+}
+.counter {
+  text-align: center;
+}
+
+.counterMax {
+  text-align: center;
+  color: red;
+}
