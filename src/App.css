@@ -1,16 +1,46 @@
-* {
-  font-size: 30px;
+.App {
+  background-color: rgb(48, 48, 64);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  height: 280px;
+  width: 340px;
+  border: 2px powderblue solid;
+  border-radius: 5px;
 }
 
 .counterBlock {
-  padding-top: 200px;
-  text-align: center;
+  font-size: 70px;
+  font-weight: 700;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px powderblue solid;
+  background-color: powderblue;
+  border-radius: 5px;
+  height: 140px;
+  width: 300px;
 }
-.counter {
-  text-align: center;
+
+.buttonBlock {
+  height: 60px;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  border: 2px powderblue solid;
+  border-radius: 5px;
 }
 
 .counterMax {
-  text-align: center;
   color: red;
 }

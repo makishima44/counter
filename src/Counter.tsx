@@ -15,15 +15,19 @@ export const Counter = () => {
     setCount(0);
   };
 
-  const incButtonDisabled = count === maxValue;
+  const isCountEqulalMaxValue = count === maxValue;
+  const incButtonDisabled = isCountEqulalMaxValue;
+
   const resetButtonDisabled = count === 0;
 
   return (
-    <div className="counterBlock">
-      <div className={count === maxValue ? "counterMax" : "counter"}>
-        {count}
+    <div className="mainBlock">
+      <div className="counterBlock">
+        <span className={isCountEqulalMaxValue ? "counterMax" : ""}>
+          {count}
+        </span>
       </div>
-      <div>
+      <div className="buttonBlock">
         <Button
           disabled={incButtonDisabled}
           onClick={incrementCounterHandler}
