@@ -35,7 +35,9 @@
   height: 60px;
   width: 300px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
   padding: 5px;
   border: 2px powderblue solid;
   border-radius: 5px;
