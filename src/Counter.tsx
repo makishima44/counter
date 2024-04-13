@@ -1,23 +1,28 @@
-import { useState } from "react";
 import { Button } from "./components/Button";
 
-export const Counter = () => {
-  const [count, setCount] = useState(0);
-  const maxValue = 5;
+export type CounterPropsType = {
+  count: number;
+  maxValue: number;
+  setCount: (count: number) => void;
+};
 
+export const Counter = ({ count, maxValue, setCount }: CounterPropsType) => {
+  //----------------------------------------------------------------------------------------------
+
+  //увеличивает счетчик
   const incrementCounterHandler = () => {
     if (count < maxValue) {
       setCount(count + 1);
     }
   };
 
+  //Обнуляет счетчик
   const resetCounterHandler = () => {
     setCount(0);
   };
 
   const isCountEqulalMaxValue = count === maxValue;
   const incButtonDisabled = isCountEqulalMaxValue;
-
   const resetButtonDisabled = count === 0;
 
   return (

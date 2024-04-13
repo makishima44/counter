@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 100px;
 }
 
 .mainBlock {
@@ -13,7 +14,7 @@
   gap: 20px;
   height: 280px;
   width: 340px;
-  border: 2px powderblue solid;
+  border: 2px cornflowerblue solid;
   border-radius: 5px;
 }
 
@@ -22,13 +23,15 @@
   font-weight: 700;
   margin-top: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px powderblue solid;
-  background-color: powderblue;
+  border: 2px cornflowerblue solid;
+  /* background-color: powderblue; */
   border-radius: 5px;
   height: 140px;
   width: 300px;
+  color: cornflowerblue;
 }
 
 .buttonBlock {
@@ -39,10 +42,22 @@
   justify-content: center;
   gap: 20px;
   padding: 5px;
-  border: 2px powderblue solid;
+  border: 2px cornflowerblue solid;
   border-radius: 5px;
+}
+
+.inputBlock {
+  width: 300px;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 18px;
 }
 
 .counterMax {
   color: red;
+}
+
+input {
+  text-align: center;
+  outline-color: cornflowerblue;
 }
