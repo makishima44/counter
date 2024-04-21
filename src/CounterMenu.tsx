@@ -3,24 +3,34 @@ import { Button } from "./components/Button";
 
 export type CounterMenuPropsType = {
   updateMaxValue: (maxValue: number) => void;
-  maxValue: number; // передаем , что бы отображалось стартовое значение
+  updateMinValue: (minValue: number) => void;
+  maxValue: number;
+  minValue: number;
 };
 
 export const CounterMenu = ({
   updateMaxValue,
+  updateMinValue,
   maxValue,
+  minValue,
 }: CounterMenuPropsType) => {
   const [newMaxValue, setNewMaxValue] = useState<number>(maxValue);
+  const [newMinValue, setNewMinValue] = useState<number>(minValue);
   //------------------------------- ---------------------------------------------------------------
 
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeMaxHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const newMaxValue = Number(event.target.value); //Преобразуем значение из value в числовой тип;
     setNewMaxValue(newMaxValue); // обновляем локальный стейт
   };
 
-  //
+  const onChangeMinHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const newMinValue = Number(event.target.value); //Преобразуем значение из value в числовой тип;
+    setNewMinValue(newMinValue); // обновляем локальный стейт
+  };
+
   const onButtonHandler = () => {
     updateMaxValue(newMaxValue);
+    updateMinValue(newMinValue);
   };
 
   return (
@@ -28,7 +38,19 @@ export const CounterMenu = ({
       <div className="counterBlock">
         <div className="inputBlock">
           <span>max value:</span>
-          <input type="number" value={newMaxValue} onChange={onChangeHandler} />
+          <input
+            type="number"
+            value={newMaxValue}
+            onChange={onChangeMaxHandler}
+          />
+        </div>
+        <div className="inputBlock">
+          <span>min value:</span>
+          <input
+            type="number"
+            value={newMinValue}
+            onChange={onChangeMinHandler}
+          />
         </div>
       </div>
 
