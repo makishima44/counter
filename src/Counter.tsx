@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { Button } from "./components/Button";
 
 export type CounterPropsType = {
   count: number;
+  error: boolean;
   maxValue: number;
   minValue: number;
   setCount: (count: number) => void;
@@ -10,6 +10,7 @@ export type CounterPropsType = {
 
 export const Counter = ({
   count,
+  error,
   maxValue,
   minValue,
   setCount,
@@ -28,22 +29,18 @@ export const Counter = ({
     setCount(minValue);
   };
 
-  const incorrectValue = minValue < 0 || maxValue < 0 || maxValue < minValue; // проверка на корректность значения
   const isCountEqulalMaxValue = count === maxValue;
-  const incButtonDisabled = isCountEqulalMaxValue || incorrectValue;
-  const resetButtonDisabled = count === minValue || incorrectValue;
+  const incButtonDisabled = isCountEqulalMaxValue || error;
+  const resetButtonDisabled = count === minValue || error;
 
   return (
     <div className="mainBlock">
       <div className="counterBlock">
         <span className={isCountEqulalMaxValue ? "counterMax" : ""}>
-          {incorrectValue ? (
-            <span className="errorText">Incorrect value!</span>
-          ) : (
-            count
-          )}
+          {error ? <span className="errorText">Incorrect value!</span> : count}
         </span>
       </div>
+
       <div className="buttonBlock">
         <Button
           disabled={incButtonDisabled}
