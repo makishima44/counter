@@ -1,5 +1,6 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Button } from "./components/Button";
+import { InputBlock } from "./components/Input";
 
 export type CounterMenuPropsType = {
   updateMaxValue: (maxValue: number) => void;
@@ -40,31 +41,53 @@ export const CounterMenu = ({
     updateErrorStatus(errorCheck); // передаем статус об ошибке в родительский компонент;
   };
 
+  // const onChangeHandler = (
+  //   event: ChangeEvent<HTMLInputElement>,
+  //   minOrMax: string
+  // ) => {
+  //   const newValue = Number(event.target.value);
+  //   if (minOrMax === "min") {
+  //     setNewMinValue(newValue);
+  //     setNewMaxValue((currentMaxValue) => {
+  //       const errorCheck =
+  //         newValue < 0 || currentMaxValue < 0 || newValue >= currentMaxValue;
+  //       setDisabled(errorCheck);
+  //       updateErrorStatus(errorCheck);
+  //       return currentMaxValue; // Возвращаем неизмененное текущее максимальное значение
+  //     });
+  //   } else if (minOrMax === "max") {
+  //     setNewMaxValue(newValue);
+  //     setNewMinValue((currentMinValue) => {
+  //       const errorCheck =
+  //         currentMinValue < 0 || newValue < 0 || currentMinValue >= newValue;
+  //       setDisabled(errorCheck);
+  //       updateErrorStatus(errorCheck);
+  //       return currentMinValue; // Возвращаем неизмененное текущее минимальное значение
+  //     });
+  //   }
+  // };
+
   const onButtonHandler = () => {
     updateMaxValue(newMaxValue); // передаем максимальное значение в родительский компонент;
     updateMinValue(newMinValue); // передаем минимальное значение в родительский компонент;
     setDisabled(true); //  обновляем локальный стейт, дизейблим кнопку после нажатия;
+    localStorage.setItem("maxValue", JSON.stringify(newMaxValue)); // сохраняем в LocalStorage значение переменной newMaxValue
+    localStorage.setItem("minValue", JSON.stringify(newMinValue)); // сохраняем в LocalStorage значение переменной newMinValue
   };
 
   return (
     <div className="mainBlock">
       <div className="counterBlock">
-        <div className="inputBlock">
-          <span>max value:</span>
-          <input
-            type="number"
-            value={newMaxValue}
-            onChange={onChangeMaxHandler}
-          />
-        </div>
-        <div className="inputBlock">
-          <span>min value:</span>
-          <input
-            type="number"
-            value={newMinValue}
-            onChange={onChangeMinHandler}
-          />
-        </div>
+        <InputBlock
+          title={"max value:"}
+          value={newMaxValue}
+          onChange={onChangeMaxHandler}
+        />
+        <InputBlock
+          title={"min value:"}
+          value={newMinValue}
+          onChange={onChangeMinHandler}
+        />
       </div>
 
       <div className="buttonBlock">

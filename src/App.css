@@ -54,6 +54,25 @@
   font-size: 18px;
 }
 
+.localStorageButtonBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+input {
+  text-align: center;
+  outline-color: cornflowerblue;
+}
+
+.button {
+  height: 40px;
+  width: 120px;
+  border-radius: 10px;
+  background-color: cornflowerblue;
+  font-size: 30px;
+  font-weight: 700;
+}
+
 .counterMax {
   color: red;
 }
@@ -61,8 +80,4 @@
 .errorText {
   font-size: 40px;
   color: red;
-}
-input {
-  text-align: center;
-  outline-color: cornflowerblue;
 }
