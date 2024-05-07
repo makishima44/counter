@@ -23,49 +23,21 @@ export const CounterMenu = ({
 
   //------------------------------- ---------------------------------------------------------------
 
-  const onChangeMaxHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const newMaxValue = Number(event.target.value); //Преобразуем значение из value в числовой тип;
-    setNewMaxValue(newMaxValue); // обновляем локальный стейт;
+  //используем useEffect для проверки ошибок
+  useEffect(() => {
     const errorCheck =
       newMinValue < 0 || newMaxValue < 0 || newMinValue >= newMaxValue;
-    setDisabled(errorCheck); //проверка на ошибку , дизейблить кнопку если неправильное значение
-    updateErrorStatus(errorCheck); // передаем статус об ошибке в родительский компонент;
+    setDisabled(errorCheck);
+    updateErrorStatus(errorCheck);
+  }, [newMaxValue, newMinValue]); // Зависимости
+
+  const onChangeMaxHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setNewMaxValue(Number(event.target.value)); // обновляем локальный стейт;
   };
 
   const onChangeMinHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const newMinValue = Number(event.target.value); //Преобразуем значение из value в числовой тип;
-    setNewMinValue(newMinValue); // обновляем локальный стейт минимального значения;
-    const errorCheck =
-      newMinValue < 0 || newMaxValue < 0 || newMinValue >= newMaxValue;
-    setDisabled(errorCheck); //проверка на ошибку , дизейблить кнопку если неправильное значение
-    updateErrorStatus(errorCheck); // передаем статус об ошибке в родительский компонент;
+    setNewMinValue(Number(event.target.value)); // обновляем локальный стейт минимального значения;
   };
-
-  // const onChangeHandler = (
-  //   event: ChangeEvent<HTMLInputElement>,
-  //   minOrMax: string
-  // ) => {
-  //   const newValue = Number(event.target.value);
-  //   if (minOrMax === "min") {
-  //     setNewMinValue(newValue);
-  //     setNewMaxValue((currentMaxValue) => {
-  //       const errorCheck =
-  //         newValue < 0 || currentMaxValue < 0 || newValue >= currentMaxValue;
-  //       setDisabled(errorCheck);
-  //       updateErrorStatus(errorCheck);
-  //       return currentMaxValue; // Возвращаем неизмененное текущее максимальное значение
-  //     });
-  //   } else if (minOrMax === "max") {
-  //     setNewMaxValue(newValue);
-  //     setNewMinValue((currentMinValue) => {
-  //       const errorCheck =
-  //         currentMinValue < 0 || newValue < 0 || currentMinValue >= newValue;
-  //       setDisabled(errorCheck);
-  //       updateErrorStatus(errorCheck);
-  //       return currentMinValue; // Возвращаем неизмененное текущее минимальное значение
-  //     });
-  //   }
-  // };
 
   const onButtonHandler = () => {
     updateMaxValue(newMaxValue); // передаем максимальное значение в родительский компонент;
