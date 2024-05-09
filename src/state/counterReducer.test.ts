@@ -1,6 +1,8 @@
 import {
   CounterStateType,
   counterReducer,
+  incrementCountAC,
+  setMaxValueAC,
   setMinValueAC,
 } from "./counterReducer";
 
@@ -22,4 +24,23 @@ test("counterReducer setMinValue", () => {
 
   expect(endState.minValue).toEqual(3);
   expect(endState.maxValue).toEqual(5);
+});
+
+test("counterReducer setMaxValue", () => {
+  const newValue = 10;
+  const action = setMaxValueAC(newValue);
+  const endState = counterReducer(startState, action);
+
+  expect(endState.minValue).toEqual(0);
+  expect(endState.maxValue).toEqual(10);
+});
+
+test("counterReducer incrementCount", () => {
+  const action = incrementCountAC();
+  const endState = counterReducer(startState, action);
+
+  expect(endState.minValue).toEqual(0);
+  expect(endState.maxValue).toEqual(5);
+  expect(endState.count).toEqual(1);
+  expect(endState.error).toEqual(false);
 });
