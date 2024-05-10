@@ -4,6 +4,7 @@ export const SET_MIN_VALUE = "SET-MIN-VALUE";
 export const SET_MAX_VALUE = "SET-MAX-VALUE";
 export const INCREMENT_COUNT = "INCREMENT-COUNT";
 export const SET_ERROR = "SET-ERROR";
+export const RESET_COUNT = "RESET-COUNT";
 
 //------------------------ТИПЫ--------------------------------------------------//
 
@@ -11,12 +12,14 @@ export type SetMinValueActionType = ReturnType<typeof setMinValueAC>;
 export type SetMaxValueActionType = ReturnType<typeof setMaxValueAC>;
 export type IncrementCountActionType = ReturnType<typeof incrementCountAC>;
 export type SetErrorActionType = ReturnType<typeof setErrorAC>;
+export type resetCountActionType = ReturnType<typeof resetCountAC>;
 
 export type ActionsType =
   | SetMinValueActionType
   | SetMaxValueActionType
   | IncrementCountActionType
-  | SetErrorActionType;
+  | SetErrorActionType
+  | resetCountActionType;
 
 export type CounterStateType = {
   minValue: number;
@@ -41,13 +44,14 @@ export const counterReducer = (
   switch (action.type) {
     case SET_MIN_VALUE: {
       const newMinValue = action.minValue;
+
+      // делаем копию state,  устанавливаем обновленный minValue и устанавливаем count равным minValue;
       const stateCopy = { ...state, minValue: newMinValue, count: newMinValue };
 
       // проверка ошибки;
       if (newMinValue < 0 || newMinValue >= state.maxValue) {
         return { ...stateCopy, error: true }; //если условия верны то ставим ошибку;
       }
-
       return stateCopy;
     }
 
@@ -59,7 +63,6 @@ export const counterReducer = (
         return { ...state, error: true }; //если условия верны то ставим ошибку;
       }
       const newCount = state.count > newMaxValue ? newMaxValue : state.count;
-
       return { ...state, maxValue: newMaxValue, count: newCount }; // возвращаем обновленный стейт;
     }
 
@@ -69,6 +72,13 @@ export const counterReducer = (
       } else {
         return state;
       }
+    }
+
+    case RESET_COUNT: {
+      return {
+        ...state,
+        count: state.minValue,
+      };
     }
 
     case SET_ERROR: {
@@ -103,4 +113,9 @@ export const setErrorAC = (error: boolean) =>
   ({
     type: SET_ERROR,
     error,
+  } as const);
+
+export const resetCountAC = () =>
+  ({
+    type: RESET_COUNT,
   } as const);
