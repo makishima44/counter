@@ -8,12 +8,12 @@ import {
 import { RootStateType } from "./state/store";
 
 export const CounterWithRedux = () => {
-  //------------------------------------------------------------------------------------/
   const dispatch = useDispatch();
   const { count, maxValue, minValue, error } = useSelector<
     RootStateType,
     CounterStateType
   >((state) => state.counter);
+
   const incrementCounterHandler = () => {
     if (count < maxValue) {
       dispatch(incrementCountAC());

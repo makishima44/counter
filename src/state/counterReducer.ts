@@ -12,14 +12,14 @@ export type SetMinValueActionType = ReturnType<typeof setMinValueAC>;
 export type SetMaxValueActionType = ReturnType<typeof setMaxValueAC>;
 export type IncrementCountActionType = ReturnType<typeof incrementCountAC>;
 export type SetErrorActionType = ReturnType<typeof setErrorAC>;
-export type resetCountActionType = ReturnType<typeof resetCountAC>;
+export type ResetCountActionType = ReturnType<typeof resetCountAC>;
 
 export type ActionsType =
   | SetMinValueActionType
   | SetMaxValueActionType
   | IncrementCountActionType
   | SetErrorActionType
-  | resetCountActionType;
+  | ResetCountActionType;
 
 export type CounterStateType = {
   minValue: number;
@@ -44,34 +44,16 @@ export const counterReducer = (
   switch (action.type) {
     case SET_MIN_VALUE: {
       const newMinValue = action.minValue;
-
-      // делаем копию state,  устанавливаем обновленный minValue и устанавливаем count равным minValue;
-      const stateCopy = { ...state, minValue: newMinValue, count: newMinValue };
-
-      // проверка ошибки;
-      if (newMinValue < 0 || newMinValue >= state.maxValue) {
-        return { ...stateCopy, error: true }; //если условия верны то ставим ошибку;
-      }
-      return stateCopy;
+      return { ...state, minValue: newMinValue, count: newMinValue };
     }
 
     case SET_MAX_VALUE: {
       const newMaxValue = action.maxValue;
-
-      // проверка ошибки;
-      if (newMaxValue <= state.minValue || newMaxValue < 0) {
-        return { ...state, error: true }; //если условия верны то ставим ошибку;
-      }
-      const newCount = state.count > newMaxValue ? newMaxValue : state.count;
-      return { ...state, maxValue: newMaxValue, count: newCount }; // возвращаем обновленный стейт;
+      return { ...state, maxValue: newMaxValue };
     }
 
     case INCREMENT_COUNT: {
-      if (state.count < state.maxValue) {
-        return { ...state, count: state.count + 1 };
-      } else {
-        return state;
-      }
+      return { ...state, count: state.count + 1 };
     }
 
     case RESET_COUNT: {

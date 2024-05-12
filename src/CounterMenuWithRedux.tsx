@@ -5,50 +5,61 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootStateType } from "./state/store";
 import {
   CounterStateType,
+  setErrorAC,
   setMaxValueAC,
   setMinValueAC,
 } from "./state/counterReducer";
 
 export const CounterMenuWithRedux = () => {
   const dispatch = useDispatch();
+
   const { maxValue, minValue } = useSelector<RootStateType, CounterStateType>(
     (state) => state.counter
   );
-  const [newMaxValue, setNewMaxValue] = useState<number>(maxValue); //локальный  стейт максимального значения;
-  const [newMinValue, setNewMinValue] = useState<number>(minValue); //локальный стейт минимального значения;
 
-  //------------------------------- ---------------------------------------------------------------
+  const [disabled, setDisabled] = useState<boolean>(true);
+
+  useEffect(() => {
+    const errorCheck = minValue < 0 || maxValue < 0 || minValue >= maxValue;
+    dispatch(setErrorAC(errorCheck));
+    setDisabled(errorCheck);
+  }, [maxValue, minValue]);
+
+  //----------------------------------------------------------------------------------------------
 
   const onChangeMaxHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewMaxValue(Number(event.target.value)); // обновляем локальный стейт;
+    dispatch(setMaxValueAC(Number(event.target.value)));
   };
 
   const onChangeMinHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setNewMinValue(Number(event.target.value)); // обновляем локальный стейт минимального значения;
+    dispatch(setMinValueAC(Number(event.target.value)));
   };
 
   const onButtonHandler = () => {
-    dispatch(setMinValueAC(newMinValue));
-    dispatch(setMaxValueAC(newMaxValue));
+    dispatch(setMinValueAC(minValue));
+    dispatch(setMaxValueAC(maxValue));
+    setDisabled(true);
   };
+
+  //-------------------------------------------------------------------------------------------------//
 
   return (
     <div className="mainBlock">
       <div className="counterBlock">
         <InputBlock
           title={"max value:"}
-          value={newMaxValue}
+          value={maxValue}
           onChange={onChangeMaxHandler}
         />
         <InputBlock
           title={"min value:"}
-          value={newMinValue}
+          value={minValue}
           onChange={onChangeMinHandler}
         />
       </div>
 
       <div className="buttonBlock">
-        <Button name={"Set"} onClick={onButtonHandler} />
+        <Button name={"Set"} disabled={disabled} onClick={onButtonHandler} />
       </div>
     </div>
   );
