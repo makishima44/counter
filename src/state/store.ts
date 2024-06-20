@@ -1,11 +1,13 @@
 import { create } from "domain";
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, legacy_createStore } from "redux";
 import { counterReducer } from "./counterReducer";
+import { thunk } from "redux-thunk";
 
 const rootReducer = combineReducers({
   counter: counterReducer,
 });
 
-export const store = createStore(rootReducer);
+//@ts-ignore
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 
 export type RootStateType = ReturnType<typeof rootReducer>;

@@ -2,21 +2,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "./components/Button";
 import {
   CounterStateType,
-  incrementCountAC,
+  DispatchType,
+  IncValuesTC,
   resetCountAC,
 } from "./state/counterReducer";
 import { RootStateType } from "./state/store";
 
 export const CounterWithRedux = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<DispatchType>();
+  //@ts-ignore
   const { count, maxValue, minValue, error } = useSelector<
     RootStateType,
     CounterStateType
-  >((state) => state.counter);
-
+  >((state) => state.counter)
+  console.log(count, maxValue, minValue, error )
   const incrementCounterHandler = () => {
     if (count < maxValue) {
-      dispatch(incrementCountAC());
+      dispatch(IncValuesTC());
     }
   };
 
