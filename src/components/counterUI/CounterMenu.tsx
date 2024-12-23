@@ -37,8 +37,8 @@ export const CounterMenu = () => {
   return (
     <div className="mainBlock">
       <div className="counterBlock">
-        <InputBlock title={"max value:"} value={maxValue} onChange={onChangeMaxHandler} />
-        <InputBlock title={"min value:"} value={minValue} onChange={onChangeMinHandler} />
+        <InputBlock title={"max value:"} value={String(maxValue)} onChange={onChangeMaxHandler} />
+        <InputBlock title={"min value:"} value={String(minValue)} onChange={onChangeMinHandler} />
       </div>
 
       <div className="buttonBlock">
