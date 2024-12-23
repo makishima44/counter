@@ -1,9 +1,9 @@
-import React, { ChangeEvent } from "react";
+import { ChangeEventHandler } from "react";
 
 type InputPropsType = {
   title: string;
   value: number;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
 export const InputBlock = ({ title, value, onChange }: InputPropsType) => {

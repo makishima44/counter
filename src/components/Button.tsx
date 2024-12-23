@@ -1,10 +1,9 @@
-import React from "react";
+import { MouseEventHandler } from "react";
 
-type ButtonPropsType = React.DetailedHTMLProps<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
-> & {
+type ButtonPropsType = {
   name: string;
+  disabled: boolean;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
 export const Button = ({ name, disabled, onClick }: ButtonPropsType) => {

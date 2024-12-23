@@ -1,0 +1,6 @@
+export const SET_MIN_VALUE = "SET-MIN-VALUE";
+export const SET_MAX_VALUE = "SET-MAX-VALUE";
+export const INCREMENT_COUNT = "INCREMENT-COUNT";
+export const SET_ERROR = "SET-ERROR";
+export const RESET_COUNT = "RESET-COUNT";
+export const SET_VALUE_FROM_LS = "SET-VALUE-FROM-LOCAL-STORAGE";

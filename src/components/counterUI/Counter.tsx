@@ -1,21 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "./components/Button";
-import {
-  CounterStateType,
-  DispatchType,
-  IncValuesTC,
-  resetCountAC,
-} from "./state/counterReducer";
-import { RootStateType } from "./state/store";
 
-export const CounterWithRedux = () => {
+import { IncValuesTC } from "../../state/counter/counterThunks";
+import { DispatchType } from "../../state/counter/thunkTypes";
+import { RootStateType } from "../../state/store/store";
+import { resetCountAC } from "../../state/counter/counterActions";
+import { CounterStateType } from "../../state/counter/types";
+import { Button } from "../Button";
+
+export const Counter = () => {
   const dispatch = useDispatch<DispatchType>();
-  //@ts-ignore
-  const { count, maxValue, minValue, error } = useSelector<
-    RootStateType,
-    CounterStateType
-  >((state) => state.counter)
-  console.log(count, maxValue, minValue, error )
+  const { count, maxValue, minValue, error } = useSelector<RootStateType, CounterStateType>((state) => state.counter);
+
   const incrementCounterHandler = () => {
     if (count < maxValue) {
       dispatch(IncValuesTC());
@@ -39,16 +34,8 @@ export const CounterWithRedux = () => {
       </div>
 
       <div className="buttonBlock">
-        <Button
-          disabled={incButtonDisabled}
-          onClick={incrementCounterHandler}
-          name="inc"
-        />
-        <Button
-          disabled={resetButtonDisabled}
-          onClick={resetCounterHandler}
-          name="reset"
-        />
+        <Button disabled={incButtonDisabled} onClick={incrementCounterHandler} name="inc" />
+        <Button disabled={resetButtonDisabled} onClick={resetCounterHandler} name="reset" />
       </div>
     </div>
   );
