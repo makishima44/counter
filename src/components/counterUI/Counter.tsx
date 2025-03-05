@@ -9,7 +9,9 @@ import { Button } from "../Button";
 
 export const Counter = () => {
   const dispatch = useDispatch<DispatchType>();
-  const { count, maxValue, minValue, error } = useSelector<RootStateType, CounterStateType>((state) => state.counter);
+  const { count, maxValue, minValue, error } = useSelector<RootStateType, CounterStateType>(
+    (state) => state.counter
+  );
 
   const incrementCounterHandler = () => {
     if (count < maxValue) {
@@ -34,8 +36,12 @@ export const Counter = () => {
       </div>
 
       <div className="buttonBlock">
-        <Button disabled={incButtonDisabled} onClick={incrementCounterHandler} name="inc" />
-        <Button disabled={resetButtonDisabled} onClick={resetCounterHandler} name="reset" />
+        <Button disabled={incButtonDisabled} onClick={incrementCounterHandler}>
+          inc
+        </Button>
+        <Button disabled={resetButtonDisabled} onClick={resetCounterHandler}>
+          reset
+        </Button>
       </div>
     </div>
   );

@@ -1,16 +1,14 @@
-import { ChangeEventHandler } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
 type InputPropsType = {
-  title: string;
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-};
+  label?: string;
+} & ComponentPropsWithoutRef<"input">;
 
-export const InputBlock = ({ title, value, onChange }: InputPropsType) => {
+export const InputBlock = ({ label, ...props }: InputPropsType) => {
   return (
     <div className={"inputBlock"}>
-      <span>{title}</span>
-      <input type="number" value={value} onChange={onChange} />
+      <span>{label}</span>
+      <input type="number" {...props} />
     </div>
   );
 };

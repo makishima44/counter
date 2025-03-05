@@ -10,7 +10,9 @@ import { Button } from "../Button";
 export const CounterMenu = () => {
   const dispatch = useDispatch();
 
-  const { maxValue, minValue } = useSelector<RootStateType, CounterStateType>((state) => state.counter);
+  const { maxValue, minValue } = useSelector<RootStateType, CounterStateType>(
+    (state) => state.counter
+  );
   const [disabled, setDisabled] = useState<boolean>(true);
 
   useEffect(() => {
@@ -37,12 +39,14 @@ export const CounterMenu = () => {
   return (
     <div className="mainBlock">
       <div className="counterBlock">
-        <InputBlock title={"max value:"} value={String(maxValue)} onChange={onChangeMaxHandler} />
-        <InputBlock title={"min value:"} value={String(minValue)} onChange={onChangeMinHandler} />
+        <InputBlock label={"max value:"} value={String(maxValue)} onChange={onChangeMaxHandler} />
+        <InputBlock label={"min value:"} value={String(minValue)} onChange={onChangeMinHandler} />
       </div>
 
       <div className="buttonBlock">
-        <Button name={"Set"} disabled={disabled} onClick={onButtonHandler} />
+        <Button disabled={disabled} onClick={onButtonHandler}>
+          Set
+        </Button>
       </div>
     </div>
   );

@@ -1,15 +1,7 @@
-import { MouseEventHandler } from "react";
+import { ComponentPropsWithoutRef, MouseEventHandler } from "react";
 
-type ButtonPropsType = {
-  name: string;
-  disabled: boolean;
-  onClick: MouseEventHandler<HTMLButtonElement>;
-};
+type ButtonPropsType = {} & ComponentPropsWithoutRef<"button">;
 
-export const Button = ({ name, disabled, onClick }: ButtonPropsType) => {
-  return (
-    <button disabled={disabled} onClick={onClick} className={"button"}>
-      {name}
-    </button>
-  );
+export const Button = ({ ...props }: ButtonPropsType) => {
+  return <button {...props} className={"button"}></button>;
 };
